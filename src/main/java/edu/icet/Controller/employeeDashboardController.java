@@ -129,7 +129,7 @@ public class employeeDashboardController implements Initializable {
     public void purchaseGetPrice() throws SQLException {
         String gPrice = "SELECT price FROM product WHERE product_name = '" + purchase_productName.getSelectionModel().getSelectedItem() + "'";
         connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/ClothingStore", "root", "12345");
-        System.out.println("hi");
+
         try {
             statement = connect.createStatement();
             result = statement.executeQuery(gPrice);
