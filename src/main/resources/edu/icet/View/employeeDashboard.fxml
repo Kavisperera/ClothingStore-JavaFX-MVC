@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.Controller.employeeDashboardController">
+    <children>
+        <AnchorPane fx:id="main_form" prefHeight="200.0" prefWidth="200.0">
+            <children>
+                <BorderPane layoutX="169.0" layoutY="155.0" prefHeight="600.0" prefWidth="1100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <top>
+                        <AnchorPane prefHeight="45.0" prefWidth="200.0" styleClass="semi-top-form" stylesheets="@DashboardDesign.css" BorderPane.alignment="CENTER">
+                            <children>
+                                <AnchorPane layoutX="71.0" layoutY="-100.0" prefHeight="37.0" prefWidth="1100.0" styleClass="top-form" stylesheets="@DashboardDesign.css" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <Button fx:id="close" layoutX="1029.0" layoutY="6.0" mnemonicParsing="false" onAction="#close" prefHeight="25.0" prefWidth="57.0" styleClass="close" />
+                                        <Button fx:id="minimize" layoutX="986.0" layoutY="6.0" mnemonicParsing="false" onAction="#minimize" prefHeight="25.0" prefWidth="43.0" styleClass="minimize" />
+                                        <ImageView fitHeight="12.0" fitWidth="12.0" layoutX="1052.0" layoutY="12.0">
+                                            <image>
+                                                <Image url="@IMG/close%20(1).png" />
+                                            </image>
+                                        </ImageView>
+                                        <ImageView fitHeight="28.0" fitWidth="18.0" layoutX="999.0" layoutY="4.0">
+                                            <image>
+                                                <Image url="@IMG/minus.png" />
+                                            </image>
+                                        </ImageView>
+                                        <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="14.0" layoutY="8.0">
+                                            <image>
+                                                <Image url="@IMG/shopping-cart%20(1).png" />
+                                            </image>
+                                        </ImageView>
+                                        <Label layoutX="40.0" layoutY="9.0" text="ClothingStore|Employee Portal">
+                                            <font>
+                                                <Font name="Tahoma" size="14.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </top>
+                    <left>
+                        <AnchorPane prefHeight="555.0" prefWidth="197.0" styleClass="Employee-nav-form" stylesheets="@DashboardDesign.css" BorderPane.alignment="CENTER">
+                            <children>
+                                <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="60.0" layoutY="24.0">
+                                    <image>
+                                        <Image url="@IMG/user%20(1).png" />
+                                    </image>
+                                </ImageView>
+                                <Label alignment="CENTER" layoutX="25.0" layoutY="111.0" prefHeight="30.0" prefWidth="150.0" text="Welcome" textFill="WHITE">
+                                    <font>
+                                        <Font name="Tahoma" size="24.0" />
+                                    </font>
+                                </Label>
+                                <Label fx:id="purchase_employeeId" alignment="CENTER" layoutX="57.0" layoutY="141.0" text="Employee" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="18.0" />
+                                    </font>
+                                </Label>
+                                <Line endX="69.0" layoutX="116.0" layoutY="184.0" startX="-104.0" stroke="WHITE" />
+                                <Button layoutX="10.0" layoutY="273.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" styleClass="Employee-nav-btn" text="Purchase" />
+                                <Label layoutX="60.0" layoutY="514.0" text="Sign Out" textFill="WHITE">
+                                    <font>
+                                        <Font name="Tahoma Bold" size="15.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="logout" layoutX="15.0" layoutY="506.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="41.0">
+                                    <styleClass>
+                                        <String fx:value="Employee-logout-btn" />
+                                        <String fx:value="shadow" />
+                                    </styleClass>
+                                </Button>
+                                <ImageView fitHeight="34.0" fitWidth="34.0" layoutX="19.0" layoutY="507.0">
+                                    <image>
+                                        <Image url="@IMG/exit%20(1).png" />
+                                    </image>
+                                </ImageView>
+                                <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="36.0" layoutY="278.0">
+                                    <image>
+                                        <Image url="@IMG/shopping-cart.png" />
+                                    </image>
+                                </ImageView>
+                            </children>
+                        </AnchorPane>
+                    </left>
+                    <center>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="555.0" prefWidth="903.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <children>
+                                        <AnchorPane layoutX="548.0" layoutY="14.0" prefHeight="528.0" prefWidth="341.0" stylesheets="@DashboardDesign.css">
+                                            <styleClass>
+                                                <String fx:value="white-bg" />
+                                                <String fx:value="shadow" />
+                                            </styleClass>
+                                            <children>
+                                                <Label layoutX="29.0" layoutY="29.0" text="Brand Name:">
+                                                    <font>
+                                                        <Font size="16.0" />
+                                                    </font>
+                                                </Label>
+                                                <TextField fx:id="purchase_brand" layoutX="127.0" layoutY="27.0" onAction="#purchaseSearchBrand" prefHeight="30.0" prefWidth="180.0" stylesheets="@DashboardDesign.css" />
+                                                <Label layoutX="14.0" layoutY="81.0" text="Product Name:">
+                                                    <font>
+                                                        <Font size="16.0" />
+                                                    </font>
+                                                </Label>
+                                                <ComboBox fx:id="purchase_productName" layoutX="127.0" layoutY="78.0" prefHeight="30.0" prefWidth="158.0" promptText="Choose" />
+                                                <Spinner fx:id="purchase_quantity" layoutX="127.0" layoutY="152.0" onMouseClicked="#purchaseSpinnerValue" prefHeight="30.0" prefWidth="109.0" />
+                                                <Label layoutX="56.0" layoutY="155.0" text="Quantity:">
+                                                    <font>
+                                                        <Font size="16.0" />
+                                                    </font>
+                                                </Label>
+                                                <Button fx:id="purchase_addBtn" layoutX="230.0" layoutY="221.0" mnemonicParsing="false" onAction="#setPurchaseAdd" prefHeight="43.0" prefWidth="83.0" styleClass="add-btn" text="Add" />
+                                                <Label layoutX="151.0" layoutY="330.0" text="Total:">
+                                                    <font>
+                                                        <Font name="Tahoma Bold" size="15.0" />
+                                                    </font></Label>
+                                                <Label fx:id="purchase_Total" layoutX="206.0" layoutY="328.0" prefHeight="23.0" prefWidth="130.0" text="Rs.0.0">
+                                                    <font>
+                                                        <Font name="Tahoma" size="18.0" />
+                                                    </font>
+                                                </Label>
+                                                <Button fx:id="purchase_payBtn" layoutX="217.0" layoutY="378.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="83.0" styleClass="pay-btn" text="Pay" />
+                                                <Button fx:id="purchase_receiptBtn" layoutX="67.0" layoutY="378.0" mnemonicParsing="false" prefHeight="43.0" prefWidth="83.0" styleClass="receipt-btn" text="Receipt" />
+                                            </children>
+                                        </AnchorPane>
+                                        <AnchorPane layoutX="16.0" layoutY="14.0" prefHeight="528.0" prefWidth="516.0" stylesheets="@DashboardDesign.css">
+                                            <styleClass>
+                                                <String fx:value="shadow" />
+                                                <String fx:value="white-bg" />
+                                            </styleClass>
+                                            <children>
+                                                <TableView fx:id="purchase_tableView" layoutX="14.0" layoutY="13.0" prefHeight="500.0" prefWidth="489.0">
+                                                    <columns>
+                                                        <TableColumn fx:id="purchase_col_brand" prefWidth="126.0" text="Brand Name" />
+                                                        <TableColumn fx:id="purchase_col_productName" prefWidth="136.0" text="Product Name" />
+                                                        <TableColumn fx:id="purchase_col_quantity" prefWidth="112.0" text="Quantity" />
+                                                        <TableColumn fx:id="purchase_col_price" prefWidth="113.0" text="Price" />
+                                                    </columns>
+                                                </TableView>
+                                            </children>
+                                        </AnchorPane>
+                                    </children>
+                                </AnchorPane>
+                            </children>
+                        </AnchorPane>
+                    </center>
+                </BorderPane>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>
