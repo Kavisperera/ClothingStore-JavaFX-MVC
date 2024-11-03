@@ -232,7 +232,6 @@ public class adminDashboardController implements Initializable {
     public void setAddProductsAdd() {
         String insertProduct = "INSERT INTO product (product_id, brand, product_name, status, price) "
                 + "VALUES (?, ?, ?, ?, ?)";
-
         connect = DBConnection.getInstance().getConnection();
         try {
             Alert alert;

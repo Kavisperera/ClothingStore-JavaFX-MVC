@@ -76,7 +76,6 @@ public class employeeDashboardController implements Initializable {
     @FXML
     private Label purchase_total;
 
-
     private double x = 0;
     private double y = 0;
     private Connection connect;
@@ -85,9 +84,11 @@ public class employeeDashboardController implements Initializable {
     private ResultSet result;
     private BigDecimal price = BigDecimal.valueOf(0);
     private SpinnerValueFactory<Integer> spinner;
-    private ObservableList<customerData> purchaseList;
     private int customerId;
     private int qty;
+
+    public employeeDashboardController() throws SQLException {
+    }
 
     public void setPurchaseAdd() throws SQLException {
         purchaseCustomerId();
@@ -98,31 +99,34 @@ public class employeeDashboardController implements Initializable {
         connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/ClothingStore", "root", "12345");
 
         try {
-            Alert alert;
             java.sql.Date sqlDate = new java.sql.Date(System.currentTimeMillis());
 
             if (purchase_brand.getText().isEmpty() || purchase_productName.getSelectionModel().getSelectedItem() == null || qty == 0) {
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Please choose product/s first");
-                alert.showAndWait();
+                return;
             } else {
+
                 prepare = connect.prepareStatement(insertProd);
                 prepare.setString(1, String.valueOf(customerId));
                 prepare.setString(2, purchase_brand.getText());
                 prepare.setString(3, purchase_productName.getSelectionModel().getSelectedItem());
                 prepare.setString(4, String.valueOf(qty));
-                prepare.setString(5, String.valueOf(price));
+
+                BigDecimal totalprice = BigDecimal.valueOf(qty).multiply(price);
+
+                prepare.setString(5, String.valueOf(totalprice));
                 prepare.setString(6, String.valueOf(sqlDate));
 
-                prepare.executeUpdate();
-                purchaseListData();
-                purchaseShowListData();
-            }
+                int rowsAffected = prepare.executeUpdate();
 
+                if (rowsAffected > 0) {
+                    purchaseShowListData();
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (prepare != null) prepare.close();
+            if (connect != null) connect.close();
         }
     }
 
@@ -137,9 +141,7 @@ public class employeeDashboardController implements Initializable {
             if (result.next()) {
                 price = result.getBigDecimal("price");
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) {e.printStackTrace();}
     }
 
     public void purchaseSearchBrand() throws SQLException {
@@ -186,10 +188,9 @@ public class employeeDashboardController implements Initializable {
     }
 
     public ObservableList<customerData> purchaseListData() throws SQLException {
-        purchaseCustomerId();
         ObservableList<customerData> customerList = FXCollections.observableArrayList();
 
-        String sql = "SELECT * FROM  customer WHERE customer_id = '" + customerId + "'";
+        String sql = "SELECT * FROM customer";
         connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/ClothingStore", "root", "12345");
 
         try {
@@ -210,12 +211,16 @@ public class employeeDashboardController implements Initializable {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            if (result != null) result.close();
+            if (prepare != null) prepare.close();
+            if (connect != null) connect.close();
         }
         return customerList;
     }
 
     public void purchaseShowListData() throws SQLException {
-        purchaseList = purchaseListData();
+        ObservableList<customerData> purchaseList = purchaseListData();
 
         purchase_col_brand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         purchase_col_productName.setCellValueFactory(new PropertyValueFactory<>("productName"));
@@ -226,22 +231,16 @@ public class employeeDashboardController implements Initializable {
     }
 
     public void purchaseCustomerId() throws SQLException {
-        String cID = "SELECT customer_id FROM customer";
+        String cID = "SELECT MAX(customer_id) AS max_id FROM customer";
         connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/ClothingStore", "root", "12345");
         try {
             prepare = connect.prepareStatement(cID);
             result = prepare.executeQuery();
 
-            while (result.next()) {
-                customerId = result.getInt("customer_id");
-            }
-
-            String checkCustomerId = "SELECT customer_id FROM customerreceipt";
-            statement = connect.createStatement();
-            result = statement.executeQuery(checkCustomerId);
-
             if (result.next()) {
-                customerId += 1;
+                customerId = result.getInt("max_id") + 1;
+            } else {
+                customerId = 1;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -302,6 +301,12 @@ public class employeeDashboardController implements Initializable {
         displayEmployeeId();
         try {
             purchaseShowListData();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            purchaseListData();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
